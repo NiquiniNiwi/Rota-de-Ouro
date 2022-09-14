@@ -6,6 +6,7 @@
     align-items: center;
     justify-content: center;
     font-size: "25px";
+    position: "absolute";
     color: white;
     height: 1px;
     width: 100%;
