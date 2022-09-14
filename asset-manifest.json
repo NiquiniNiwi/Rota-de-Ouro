@@ -1,16 +1,13 @@
 {
   "files": {
-    "main.css": "/Rota-de-Ouro/static/css/main.073c9b0a.css",
-    "main.js": "/Rota-de-Ouro/static/js/main.f5780b6d.js",
-    "static/js/787.d1d4a2c2.chunk.js": "/Rota-de-Ouro/static/js/787.d1d4a2c2.chunk.js",
-    "static/media/logo.svg": "/Rota-de-Ouro/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "main.css": "/Rota-de-Ouro/static/css/main.e6c13ad2.css",
+    "main.js": "/Rota-de-Ouro/static/js/main.8348a212.js",
     "index.html": "/Rota-de-Ouro/index.html",
-    "main.073c9b0a.css.map": "/Rota-de-Ouro/static/css/main.073c9b0a.css.map",
-    "main.f5780b6d.js.map": "/Rota-de-Ouro/static/js/main.f5780b6d.js.map",
-    "787.d1d4a2c2.chunk.js.map": "/Rota-de-Ouro/static/js/787.d1d4a2c2.chunk.js.map"
+    "main.e6c13ad2.css.map": "/Rota-de-Ouro/static/css/main.e6c13ad2.css.map",
+    "main.8348a212.js.map": "/Rota-de-Ouro/static/js/main.8348a212.js.map"
   },
   "entrypoints": [
-    "static/css/main.073c9b0a.css",
-    "static/js/main.f5780b6d.js"
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.8348a212.js"
   ]
 }
