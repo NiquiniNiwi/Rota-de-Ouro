@@ -1,0 +1,13 @@
+.leaflet-container{
+    background-color: #282c34;
+    min-height: 100vh;
+    display: "block";
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: "25px";
+    color: white;
+    height: 1px;
+    width: 100%;
+    z-index: 1;
+}
