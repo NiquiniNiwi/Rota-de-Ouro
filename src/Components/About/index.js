@@ -21,7 +21,6 @@ function AboutComponent(){
             </Text>
             <Text align="justify">
                 Primeira versão do front-end do projeto de Engenharia de Software II <br />
-                <hr />
                 Funcionalidades: <br />
                 <li>
                     Trocar abas

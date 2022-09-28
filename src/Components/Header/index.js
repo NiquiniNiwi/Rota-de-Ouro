@@ -3,16 +3,23 @@ import { useCallback } from "react";
 import useHeader from "../../Hooks/Header/index,";
 import Searcher from "../Search";
 import AboutComponent from "../About";
+import useRoutes from "../../Hooks/Routes";
+import Map from "../Map";
+
 
 function Header(){
     const [isLargerThan1440] = useMediaQuery('(min-width: 1440px)');
     const {Search, setSearch, Home, setHome, About, setAbout} = useHeader();
+    const {generateRoute, invertRoutes, polyline, routeState} = useRoutes();
 
     const UpdateHome = useCallback(() => {
+        generateRoute().then(() => {
+            invertRoutes();
+        });
         setHome(true);
         setSearch(false);
         setAbout(false);
-    }, [setAbout, setHome, setSearch]);
+    }, [generateRoute, invertRoutes, setAbout, setHome, setSearch]);
     
     const UpdateSearch = useCallback(() => {
         setHome(false);
@@ -93,6 +100,7 @@ function Header(){
             <>
                 {Search && (<Searcher />)}
                 {About && (<AboutComponent />)}
+                <Map polyline={polyline} routeState={routeState}/>
             </>
         </>
         

@@ -18,7 +18,7 @@ const useHeader = () => {
     }, []);
 
     useEffect(() => {
-        console.log([Home, "Home state"], [About, "About state"], [Search, "Search state"]);
+        // console.log([Home, "Home state"], [About, "About state"], [Search, "Search state"]);
       }, [Home, Search, About]);
     
     return {Search, setSearch, Home, setHome, About, setAbout}
