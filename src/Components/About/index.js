@@ -31,6 +31,12 @@ function AboutComponent(){
                 <li>
                     Mostrar localidade atual caso permitido pelo usuario
                 </li>
+                <li>
+                    Gera uma rota entre lugares predeterminados
+                </li>
+                <li>
+                    Limpa rota e destino
+                </li>
             </Text>
         </Box>
     );

@@ -1,19 +1,14 @@
 import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet'
-import './index.css';
-import useGeoLocation from '../../Hooks/Geolocation';
-import { useEffect } from 'react';
+import '../../Map/index.css';
+import useGeoLocation from '../../../Hooks/Geolocation/index';
 
-function Map({polyline, routeState, destino}){
+function SearchMap({teste, polyline, routeState, dState}){
     const ufop = [-20.395580231739956, -43.50994172644795];
     const location = useGeoLocation();
 
     const blackOptions = { color: 'black' };
-
-    useEffect(() => {
-        
-    }, []);
     return (
-        <MapContainer center={ufop} zoom={12} scrollWheelZoom={true}>
+        <MapContainer center={ufop} zoom={9} scrollWheelZoom={true}>
             <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -25,13 +20,13 @@ function Map({polyline, routeState, destino}){
                 </Popup>
             </Marker>
             {routeState && <Polyline pathOptions={blackOptions} positions={polyline}/>}
-            <Marker position={[-20.2481745,-43.8043936]}>
+            {dState && <Marker position={[teste[1], teste[0]]}>
                 <Popup>
-                    Destino
+                    {teste}
                 </Popup>
-            </Marker>
+            </Marker>}
       </MapContainer>
     );
 }
 
-export default Map;
+export default SearchMap;
