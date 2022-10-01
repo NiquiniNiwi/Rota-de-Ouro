@@ -1,23 +1,16 @@
 import { Box, useMediaQuery, Text, Button } from '@chakra-ui/react'
 import { useCallback, useEffect } from "react";
-import useRoutes from "../../Hooks/Routes";
-import SearchMap from '../Map/SearchMap'; 
+import { places } from '../../Examples';
+import { useRoutes } from "../../Hooks/Routes";
 
 function Searcher(){
     const [isLargerThan1440] = useMediaQuery('(min-width: 1440px)');
     const {
-        generateRoute, setDestination, destination, routeState, 
-        polyline, dState, setDState, clearRoute, setRouteState,
+        generateRoute, setDestination, setDState, clearRoute, setRouteState,
     } = useRoutes();
 
-    const SP = useCallback(() => {
-        setDestination([-46.7862276,-23.6526024]);
-        setRouteState(false);
-        setDState(true);
-    }, [setDestination, setRouteState, setDState]);
-
-    const ITA = useCallback(() => {
-        setDestination([-43.8043936,-20.2481745]);
+    const setPlace = useCallback((lat, long) => {
+        setDestination([String(long), String(lat)]);
         setRouteState(false);
         setDState(true);
     }, [setDestination, setRouteState, setDState]);
@@ -57,28 +50,22 @@ function Searcher(){
                 Procurar
             </Text>
 
-            <Text align="center" marginTop={isLargerThan1440 ? "15px" : "9px"}>
-                <Button
-                    _hover={{}}
-                    fontFamily="griffy"
-                    fontSize={isLargerThan1440 ? "42px" : "21px"}
-                    textColor={"#E6AF2E"}
-                    onClick={ITA}
-                >
-                    Itabirito
-                </Button>
-            </Text>
-            <Text align="center" marginTop={isLargerThan1440 ? "15px" : "9px"}>
-                <Button
-                    _hover={{}}
-                    fontFamily="griffy"
-                    fontSize={isLargerThan1440 ? "42px" : "21px"}
-                    textColor={"#E6AF2E"}
-                    onClick={SP}
-                >
-                    Sao Paulo
-                </Button>
-            </Text>
+            {places.map((place) => {
+                return (
+                <Text align="center" marginTop={isLargerThan1440 ? "15px" : "9px"} key={place.Name}>
+                    <Button
+                        _hover={{}}
+                        fontFamily="griffy"
+                        fontSize={isLargerThan1440 ? "42px" : "21px"}
+                        textColor={"#E6AF2E"}
+                        onClick={() => {setPlace(place.Lat, place.Long)}}
+                        key={`${place.Name}-button`}
+                        w={isLargerThan1440 ? "380px" : "190px"}
+                    >
+                        {place.Name}
+                    </Button>
+                </Text>)
+            })}
             <Text align="center" marginTop={isLargerThan1440 ? "15px" : "9px"}>
                 <Button
                     bg="#f0f0"
@@ -104,7 +91,6 @@ function Searcher(){
                 </Button>
             </Text>
         </Box>
-        <SearchMap teste={destination} polyline={polyline} routeState={routeState} dState={dState}/> 
         </>
     );
 }

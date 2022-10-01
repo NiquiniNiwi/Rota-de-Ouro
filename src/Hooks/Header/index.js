@@ -1,6 +1,9 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, createContext, useContext } from "react";
 
-const useHeader = () => {
+const headerContext = createContext({});
+
+
+const HeaderProvider = ({children}) => {
     const [Home, setHomeState] = useState(true);
     const [Search, setSearchState] = useState(false);
     const [About, setAboutState] = useState(false);
@@ -21,7 +24,22 @@ const useHeader = () => {
         // console.log([Home, "Home state"], [About, "About state"], [Search, "Search state"]);
       }, [Home, Search, About]);
     
-    return {Search, setSearch, Home, setHome, About, setAbout}
+    return <headerContext.Provider
+           value={{
+            setHome,
+            Home,
+            setSearch,
+            Search,
+            setAbout,
+            About,
+            }} 
+        >
+        {children}
+    </headerContext.Provider>
 }
 
-export default useHeader
+const useHeader = () => {
+    return useContext(headerContext)
+}
+
+export {HeaderProvider, useHeader}

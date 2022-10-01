@@ -1,10 +1,6 @@
 import { Box, Text, HStack, useMediaQuery, Button } from "@chakra-ui/react";
 import { useCallback } from "react";
-import useHeader from "../../Hooks/Header/index,";
-import Searcher from "../Search";
-import AboutComponent from "../About";
-import HomeMap from "../Map/HomeMap";
-
+import { useHeader } from "../../Hooks/Header";
 
 function Header(){
     const [isLargerThan1440] = useMediaQuery('(min-width: 1440px)');
@@ -93,11 +89,6 @@ function Header(){
                     </HStack>
                 </Box>
             </HStack>
-            <>
-                {Search && (<Searcher />)}
-                {About && (<AboutComponent />)}
-                {!Search && (<HomeMap />)}
-            </>
         </>
         
     );

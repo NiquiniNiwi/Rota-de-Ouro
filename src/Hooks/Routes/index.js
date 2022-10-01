@@ -1,9 +1,10 @@
 import axios from "axios";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, createContext, useContext } from "react";
 import useGeoLocation from "../Geolocation";
 
+const routesContext = createContext({});
 
-const useRoutes = () => {
+const RoutesProvider = ({ children }) => {
     const location = useGeoLocation();
     const [route, setRoute] = useState(undefined);
     const [routeState, setRouteState] = useState(false);
@@ -52,10 +53,17 @@ const useRoutes = () => {
         // console.log("foi", route);
       }, [invertRoutes, route]);
 
-    return {
+    return <routesContext.Provider
+    value={{
         generateRoute, route, invertRoutes, routeState, polyline, 
         destination, setDestination, setDState, dState, clearRoute, setRouteState
-    }
+    }} 
+ >
+ {children}
+</routesContext.Provider>
 }
 
-export default useRoutes;
+const useRoutes = () => {
+    return useContext(routesContext)
+}
+export {RoutesProvider, useRoutes};
