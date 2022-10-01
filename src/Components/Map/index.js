@@ -2,7 +2,7 @@ import { MapContainer, TileLayer, Marker, Popup, Polyline } from 'react-leaflet'
 import './index.css';
 import useGeoLocation from '../../Hooks/Geolocation/index';
 import { useRoutes } from '../../Hooks/Routes';
-import { GoldIcon, RedIcon } from '../icon';
+import { GoldIcon, RedIcon } from '../../assets/icon';
 
 function Map(){
     const {dState, routeState, polyline, destination} = useRoutes();
