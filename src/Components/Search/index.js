@@ -90,7 +90,7 @@ function Searcher(){
             zIndex="3"
             pos="absolute"
             marginTop={isLargerThan1440 ? "150px" : "90px"}
-            h={isLargerThan1440 ? "740px" : "400px"}
+            h={isLargerThan1440 ? "760px" : "370px"}
             w={isLargerThan1440 ? "650px" : "375px"}
         >
             <Text
@@ -148,7 +148,7 @@ function Searcher(){
             </HStack>
             <Box
             marginTop="25px"
-            h={isLargerThan1440 ? "500px" : "200px"}
+            h={isLargerThan1440 ? "500px" : "170px"}
             overflowY="scroll"
             overflowX="hidden">
             {pontos.data.map((place) => {
