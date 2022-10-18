@@ -8,18 +8,23 @@ import { Box, useMediaQuery, Text, Button, useDisclosure, Modal as ChakraModal,
     Image,
     HStack,} from '@chakra-ui/react'
 import { useAPI } from '../../Hooks/API';
-import { LoremIpsum } from 'react-lorem-ipsum';
+// import { LoremIpsum } from 'react-lorem-ipsum';
 import { useCallback, useEffect, useState } from "react";
-import { places } from '../../Examples';
+// import { places } from '../../Examples';
 import { useRoutes } from "../../Hooks/Routes";
 
 function Searcher(){
     const {isOpen = false, onOpen, onClose} = useDisclosure();
-    const {pontos, APICall } = useAPI();
+    const {pontos} = useAPI();
     const [Place, setPlace] = useState({
-        Nome: "",
-        Lat: "",
-        Long: ""});
+        name: "",
+        description: "",
+        latitude: "",
+        longitude: "",
+        opening_hours: "",
+        payment_kind: "",
+        imagen: "",
+        });
     const [isLargerThan1440] = useMediaQuery('(min-width: 1440px)');
     const {
         generateRoute, setDState, clearRoute, setRouteState, setDestination
@@ -41,10 +46,9 @@ function Searcher(){
     }, [clearRoute, setDState]);
     
     useEffect(() => {
-        APICall();
         // console.log("foi", destination);
         // console.log(dState);
-      }, [APICall]);
+      }, []);
     return (
         <>
         <Box
@@ -58,8 +62,6 @@ function Searcher(){
             marginTop={isLargerThan1440 ? "150px" : "90px"}
             h={isLargerThan1440 ? "740px" : "370px"}
             w={isLargerThan1440 ? "650px" : "375px"}
-            overflowY="scroll"
-            overflowX="hidden"
         >
             <Text
                 align="center"
@@ -70,7 +72,7 @@ function Searcher(){
             </Text>
             <HStack marginLeft="10px">
             <Text align="center" borderColor="#000" borderWidth={isLargerThan1440 ? "5px" : "2px"} borderRadius="5px" _hover={{
-                bg: "#fff",
+                bg: "#002927",
             }}>
                 <Button
                     bg="#f0f0"
@@ -84,7 +86,7 @@ function Searcher(){
                 </Button>
             </Text>
             <Text align="center" borderColor="#000" borderWidth={isLargerThan1440 ? "5px" : "2px"} borderRadius="5px" _hover={{
-                bg: "#fff",
+                bg: "#002927",
             }}>
                 <Button
                     bg="#f0f0"
@@ -98,27 +100,34 @@ function Searcher(){
                 </Button>
             </Text>
             </HStack>
-            {places.map((place) => {
+            <Box
+            marginTop="25px"
+            h={isLargerThan1440 ? "500px" : "200px"}
+            overflowY="scroll"
+            overflowX="hidden">
+            {pontos.data.map((place) => {
                 return (
                 <Text align="center" marginTop={isLargerThan1440 ? "15px" : "9px"} key={place.Name}>
                     <Button
-                        _hover={{bg: "#000", textColor: "#6B0504"}}
+                        _hover={{bg: "#002927", textColor: "#E6AF2E"}}
+                        bg="#000"
                         fontFamily="griffy"
-                        fontSize={isLargerThan1440 ? "42px" : "21px"}
-                        textColor={"#E6AF2E"}
+                        fontSize={isLargerThan1440 ? "25px" : "15px"}
+                        textColor={"#6B0504"}
                         onClick={() => {onOpen(); setPlace(place)}}
-                        key={`${place.Name}-button`}
-                        w={isLargerThan1440 ? "380px" : "190px"}
+                        key={`${place.name}-button`}
+                        w={isLargerThan1440 ? "500px" : "300px"}
                     >
-                        {place.Name}
+                        {place.name}
                     </Button>
                 </Text>)
             })}
+            </Box>
 
         </Box>
-        <ChakraModal isOpen={isOpen} size="xl" onClose={onClose}>
+        <ChakraModal isOpen={isOpen} size={isLargerThan1440 ? Box : "xl"} onClose={onClose}>
             <ModalOverlay borderRadius="10px" />
-            <ModalContent>
+            <ModalContent w="1500px">
                 <ModalHeader
                     fontSize="md"
                     borderBottom="1px solid"
@@ -127,20 +136,25 @@ function Searcher(){
                     textColor="#E6AF2E"
                     >
                     <HStack>
-                    <Image boxSize="100px" src='https://bit.ly/dan-abramov' alt='Dan Abramov' />
+                    <Image boxSize={isLargerThan1440 ? "200px" : "100px"} src={Place.imagen} alt='Dan Abramov' />
                     <Text fontSize="28px">
-                        {Place.Name}
+                        {Place.name}
                     </Text>
                     </HStack>
                     </ModalHeader>
                     <ModalCloseButton />
-                    <ModalBody borderBottom="1px solid" borderColor="#E6AF2E" bg="#6B0504" textColor="#DDDDDD">
-                    {console.log(pontos)}    
-                    Descrição: <LoremIpsum p={1} /><br/>
-                    Horario de funcionamento: <LoremIpsum p={1} /><br/>
-                    Ingresso: sim<br/>
-                    Latitude: {Place.Lat} <br/>
-                    Longitude: {Place.Long}
+                    <ModalBody borderBottom="1px solid" borderColor="#E6AF2E" bg="#6B0504" textColor="#DDDDDD">  
+                    <Text fontSize={isLargerThan1440 ? "30px" : "20px"}>
+                    Descrição: {Place.description} 
+                    <br/>
+                    <br/>
+                    <hr/>
+                    Horario de funcionamento: {Place.opening_hours}
+                    <br/>
+                    <br/>
+                    <hr/>
+                    Ingresso: {Place.payment_kind}<tr/>
+                    </Text>
                     </ModalBody>
 
                     <ModalFooter bg="#6B0504">
@@ -162,7 +176,7 @@ function Searcher(){
                     _hover={{bg: "#000", textColor: "#6B0504"}}
                     color="#DDDDDD"
                     onClick={() => {
-                        selectDestination(Place.Lat, Place.Long);
+                        selectDestination(Place.latitude, Place.longitude);
                         onClose();
                     }}
                     mr={3}

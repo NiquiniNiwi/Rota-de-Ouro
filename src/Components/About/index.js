@@ -20,7 +20,7 @@ function AboutComponent(){
                 About
             </Text>
             <Text align="justify">
-                Primeira versão do front-end do projeto de Engenharia de Software II <br />
+                <Text fontSize={isLargerThan1440 ? "35px" : "25px"}>MVP do projeto de Engenharia de Software II </Text><br />
                 Funcionalidades: <br />
                 <li>
                     Trocar abas
@@ -36,6 +36,12 @@ function AboutComponent(){
                 </li>
                 <li>
                     Limpa rota e destino
+                </li>
+                <li>
+                    Listagem dos pontos turisticos da cidade 
+                </li>
+                <li>
+                    Informações dos pontos turisticos como: Descrição, Horario de funcionamento e Ingressos
                 </li>
             </Text>
         </Box>

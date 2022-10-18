@@ -6,19 +6,19 @@ const APIContext = createContext({});
 const APIProvider = ({children}) => {
     const [pontos, setPontos] = useState({});
     const APICall = useCallback(async () => {
-        await axios.post("http://us-central1-expanded-rider-170119.cloudfunctions.net/read_all"
+        await axios.get("https://raw.githubusercontent.com/NiquiniNiwi/teste/main/Pontos.json"
         ).then((response) => {
-            setPontos(response)
+            setPontos(response);
         }).catch((error) => {
             console.log(error);
         });
     }, []);
 
     useEffect(() => {
-        //APICall();
-    }, []);
+        APICall();
+    }, [APICall]);
     return <APIContext.Provider
-    value={{pontos, APICall}}>
+    value={{pontos}}>
         {children}
     </APIContext.Provider>
 }
