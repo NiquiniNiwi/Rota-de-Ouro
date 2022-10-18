@@ -6,14 +6,20 @@ import { Box, useMediaQuery, Text, Button, useDisclosure, Modal as ChakraModal,
     ModalContent,
     ModalFooter,
     Image,
-    HStack,} from '@chakra-ui/react'
+    HStack,
+    Input,
+    IconButton,} from '@chakra-ui/react'
 import { useAPI } from '../../Hooks/API';
+import { BsSearch } from "react-icons/bs";
 // import { LoremIpsum } from 'react-lorem-ipsum';
 import { useCallback, useEffect, useState } from "react";
 // import { places } from '../../Examples';
 import { useRoutes } from "../../Hooks/Routes";
 
 function Searcher(){
+    let estado;
+    const [input, setInput] = useState("");
+    const [error, setError] = useState("-");
     const {isOpen = false, onOpen, onClose} = useDisclosure();
     const {pontos} = useAPI();
     const [Place, setPlace] = useState({
@@ -26,6 +32,30 @@ function Searcher(){
         imagen: "",
         });
     const [isLargerThan1440] = useMediaQuery('(min-width: 1440px)');
+    const handleChange = event => {
+        setInput(event.target.value);
+        setError("-");
+    }
+    const handleSubmit = useCallback(() => {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        estado = pontos.data.length;
+        pontos.data.map((ponto) => {
+            if(ponto.name.toLocaleLowerCase().includes(input.toLocaleLowerCase())){
+                estado -= 1;
+                if(estado === 19){
+                    setPlace(ponto);
+                    onOpen();
+                }
+            } else {
+                if(estado > 19){
+                    setError("Não econtrado");
+                } else {
+                    setError("-");
+                }            
+            }
+            return <></>
+        })
+    }, [input, onOpen, pontos.data]);
     const {
         generateRoute, setDState, clearRoute, setRouteState, setDestination
     } = useRoutes();
@@ -60,7 +90,7 @@ function Searcher(){
             zIndex="3"
             pos="absolute"
             marginTop={isLargerThan1440 ? "150px" : "90px"}
-            h={isLargerThan1440 ? "740px" : "370px"}
+            h={isLargerThan1440 ? "740px" : "400px"}
             w={isLargerThan1440 ? "650px" : "375px"}
         >
             <Text
@@ -70,7 +100,23 @@ function Searcher(){
             >
                 Procurar
             </Text>
-            <HStack marginLeft="10px">
+            <HStack>
+                <Input
+                    bg="#000"
+                    textColor="#6B0504"
+                    type="text"
+                    value={input}
+                    placeholder="Procure pelo nome"
+                    onChange={handleChange}
+                />
+                <IconButton
+                    bg="#000"
+                    icon={<BsSearch />}
+                    onClick={handleSubmit}
+                />
+            </HStack>
+            {error}
+            <HStack marginLeft="10px" marginTop="5px">
             <Text align="center" borderColor="#000" borderWidth={isLargerThan1440 ? "5px" : "2px"} borderRadius="5px" _hover={{
                 bg: "#002927",
             }}>
@@ -114,7 +160,7 @@ function Searcher(){
                         fontFamily="griffy"
                         fontSize={isLargerThan1440 ? "25px" : "15px"}
                         textColor={"#6B0504"}
-                        onClick={() => {onOpen(); setPlace(place)}}
+                        onClick={() => {setPlace(place); onOpen();}}
                         key={`${place.name}-button`}
                         w={isLargerThan1440 ? "500px" : "300px"}
                     >
