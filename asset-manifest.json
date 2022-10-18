@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/Rota-de-Ouro/static/css/main.f5962d9f.css",
-    "main.js": "/Rota-de-Ouro/static/js/main.72dec572.js",
+    "main.js": "/Rota-de-Ouro/static/js/main.0def72ea.js",
     "index.html": "/Rota-de-Ouro/index.html",
     "main.f5962d9f.css.map": "/Rota-de-Ouro/static/css/main.f5962d9f.css.map",
-    "main.72dec572.js.map": "/Rota-de-Ouro/static/js/main.72dec572.js.map"
+    "main.0def72ea.js.map": "/Rota-de-Ouro/static/js/main.0def72ea.js.map"
   },
   "entrypoints": [
     "static/css/main.f5962d9f.css",
-    "static/js/main.72dec572.js"
+    "static/js/main.0def72ea.js"
   ]
 }
